@@ -1,21 +1,20 @@
 import React from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Products from "./components/Products";
-import About from "./components/About";
-import Footer from "./components/Footer";
-import Sidebar from "./components/Sidebar";
+import { Route, Routes } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
+
+import Main from "./Main";
+import Admin from "./Admin";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Sidebar />
-      <Hero />
-      <Products />
-      <About />
-      <Footer />
+      <CookiesProvider>
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/admin" element={<Admin />}></Route>
+        </Routes>
+      </CookiesProvider>
     </div>
   );
 }
