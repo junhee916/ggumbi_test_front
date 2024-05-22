@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "react-app",
       script: "npx",
-      args: ["serve", "-s", "build", "-l", "3000"],
+      args: ["serve", "-s", "build", "-l", "3000", "-H", "0.0.0.0"],
       cwd: "/home/ubuntu/ggumbi_test_front/client", // 프로젝트 디렉토리 경로 수정
       env: {
         NODE_ENV: "production",
