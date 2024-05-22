@@ -11,7 +11,7 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://43.201.34.41:3000/setOrderInfo"
+          "http://43.201.34.41:3000/api/setOrderInfo"
         ); // 백엔드 API 엔드포인트
         setData(response.data);
         setLoading(false);
