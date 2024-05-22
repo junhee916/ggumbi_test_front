@@ -1,7 +1,7 @@
-// DataTableComponent.js
-import React, { useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
+// src/App.js
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import DataTable from "react-data-table-component";
 
 const Admin = () => {
   const [data, setData] = useState([]);
@@ -11,8 +11,8 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://43.201.34.41:3000/api/setOrderInfo"
-        ); // 백엔드 API 엔드포인트
+          "http://3.36.70.226:3001/api/setOrderInfo"
+        ); // Node.js 서버의 URL
         setData(response.data);
         setLoading(false);
       } catch (error) {
@@ -58,13 +58,15 @@ const Admin = () => {
   ];
 
   return (
-    <DataTable
-      title="Order Information"
-      columns={columns}
-      data={data}
-      progressPending={loading}
-      pagination
-    />
+    <div className="App">
+      <DataTable
+        title="Order Information"
+        columns={columns}
+        data={data}
+        progressPending={loading}
+        pagination
+      />
+    </div>
   );
 };
 
