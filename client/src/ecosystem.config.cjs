@@ -2,8 +2,12 @@ module.exports = {
   apps: [
     {
       name: "react-app",
-      script: "serve",
-      args: ["-s", "/home/ubuntu/ggumbi_test_front/client/build", "-l", "3000"],
+      script: "npx",
+      args: "serve -s build -l 3000",
+      cwd: "/home/ubuntu/your-react-app", // 프로젝트 디렉토리 경로
+      env: {
+        NODE_ENV: "production",
+      },
     },
   ],
 };

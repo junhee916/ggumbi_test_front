@@ -13,6 +13,7 @@ const Main = () => {
         const response = await axios.get(
           "http://3.36.70.226:3001/api/setOrderInfo"
         ); // Node.js 서버의 URL
+
         setData(response.data);
         setLoading(false);
       } catch (error) {
