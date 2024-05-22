@@ -11,8 +11,11 @@ const Main = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://3.36.70.226:3001/api/setOrderInfo"
-        ); // Node.js 서버의 URL
+          "http://3.36.70.226:3001/api/setOrderInfo",
+          {
+            withCredentials: true,
+          }
+        );
 
         setData(response.data);
         setLoading(false);
