@@ -43,11 +43,32 @@ const Main = () => {
     }
   };
 
-  const handleStatusChange = (id, orderNum, newStatus) => {
-    // 여기에 상태 변경 로직을 추가하세요. 예를 들어, API 호출 등.
-    console.log(`Change status for ID ${id} to ${orderNum} to ${newStatus}`);
-  };
+  const handleStatusChange = async (id, orderNum, newStatus) => {
+    try {
+      // POST 요청 예시
+      const response = await axios.post(
+        "http://43.201.34.41:3002/api/deliveryControlOrder",
+        {
+          order_num: orderNum,
+          new_status: newStatus,
+          return_reason: "고객 요청", // 필요에 따라 이 값을 변경하세요
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
+      console.log("Updated Data:", response.data);
+
+      // 상태를 업데이트합니다.
+      const updatedData = data.map((item) =>
+        item.order_num === id ? response.data[0] : item
+      );
+      setData(updatedData);
+    } catch (error) {
+      console.error("Error updating order:", error);
+    }
+  };
   const renderButtons = (row) => (
     <div>
       <button onClick={() => handleStatusChange(row.id, row.order_num, 0)}>
