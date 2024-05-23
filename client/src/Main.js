@@ -26,7 +26,7 @@ const Main = () => {
     };
 
     fetchData();
-  }, []);
+  }, [data]);
 
   const deliveryStatusText = (status) => {
     switch (status) {
