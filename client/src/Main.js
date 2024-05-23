@@ -94,7 +94,7 @@ const Main = () => {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-      width: "200px", // 너비를 200px로 설정
+      width: "500px", // 너비를 200px로 설정
     },
   ];
 
