@@ -71,6 +71,22 @@ const Main = () => {
     }
   };
 
+  const recallEvent = async () => {
+    try {
+      const response = await axios.get(
+        "http://43.201.34.41:3002/api/getDeliveryInfo?order_num=1",
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("recall 확인: ", response.data);
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
+  };
   const renderButtons = (row) => (
     <div>
       <button onClick={() => handleStatusChange(row.id, row.order_num, 0)}>
@@ -138,6 +154,7 @@ const Main = () => {
         progressPending={loading}
         pagination
       />
+      <button onClick={recallEvent}>재요청</button>
     </div>
   );
 };
