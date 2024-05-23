@@ -16,7 +16,7 @@ const Main = () => {
             withCredentials: true,
           }
         );
-
+        console.log("data 확인: ", response.data);
         setData(response.data);
         setLoading(false);
       } catch (error) {
