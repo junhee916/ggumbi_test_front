@@ -11,7 +11,7 @@ const Main = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://3.36.70.226:3002/api/setOrderInfo",
+          "http://43.201.34.41:3002/api/setOrderInfo",
           {
             withCredentials: true,
           }
