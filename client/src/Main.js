@@ -30,13 +30,13 @@ const Main = () => {
 
   const deliveryStatusText = (status) => {
     switch (status) {
-      case 0:
+      case "0":
         return "배송전";
-      case 1:
+      case "1":
         return "입고";
-      case 2:
+      case "2":
         return "배송중";
-      case 3:
+      case "3":
         return "배송완료";
       default:
         return "알 수 없음";
@@ -94,6 +94,7 @@ const Main = () => {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
+      width: "200px", // 너비를 200px로 설정
     },
   ];
 
