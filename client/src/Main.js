@@ -43,17 +43,25 @@ const Main = () => {
     }
   };
 
-  const handleStatusChange = (id, newStatus) => {
+  const handleStatusChange = (id, orderNum, newStatus) => {
     // 여기에 상태 변경 로직을 추가하세요. 예를 들어, API 호출 등.
-    console.log(`Change status for ID ${id} to ${newStatus}`);
+    console.log(`Change status for ID ${id} to ${orderNum} to ${newStatus}`);
   };
 
-  const renderButtons = (id) => (
+  const renderButtons = (row) => (
     <div>
-      <button onClick={() => handleStatusChange(id, 0)}>배송전</button>
-      <button onClick={() => handleStatusChange(id, 1)}>입고</button>
-      <button onClick={() => handleStatusChange(id, 2)}>배송중</button>
-      <button onClick={() => handleStatusChange(id, 3)}>배송완료</button>
+      <button onClick={() => handleStatusChange(row.id, row.order_num, 0)}>
+        배송전
+      </button>
+      <button onClick={() => handleStatusChange(row.id, row.order_num, 1)}>
+        입고
+      </button>
+      <button onClick={() => handleStatusChange(row.id, row.order_num, 2)}>
+        배송중
+      </button>
+      <button onClick={() => handleStatusChange(row.id, row.order_num, 3)}>
+        배송완료
+      </button>
     </div>
   );
 
@@ -90,7 +98,7 @@ const Main = () => {
     },
     {
       name: "Actions",
-      cell: (row) => renderButtons(row.id),
+      cell: (row) => renderButtons(row),
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
