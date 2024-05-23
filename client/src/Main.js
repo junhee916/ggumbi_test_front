@@ -28,6 +28,35 @@ const Main = () => {
     fetchData();
   }, []);
 
+  const deliveryStatusText = (status) => {
+    switch (status) {
+      case 0:
+        return "배송전";
+      case 1:
+        return "입고";
+      case 2:
+        return "배송중";
+      case 3:
+        return "배송완료";
+      default:
+        return "알 수 없음";
+    }
+  };
+
+  const handleStatusChange = (id, newStatus) => {
+    // 여기에 상태 변경 로직을 추가하세요. 예를 들어, API 호출 등.
+    console.log(`Change status for ID ${id} to ${newStatus}`);
+  };
+
+  const renderButtons = (id) => (
+    <div>
+      <button onClick={() => handleStatusChange(id, 0)}>배송전</button>
+      <button onClick={() => handleStatusChange(id, 1)}>입고</button>
+      <button onClick={() => handleStatusChange(id, 2)}>배송중</button>
+      <button onClick={() => handleStatusChange(id, 3)}>배송완료</button>
+    </div>
+  );
+
   const columns = [
     {
       name: "ID",
@@ -35,36 +64,43 @@ const Main = () => {
       sortable: true,
     },
     {
-      name: "Name",
+      name: "이름",
       selector: (row) => row.name,
       sortable: true,
     },
     {
-      name: "Order Number",
+      name: "주문번호",
       selector: (row) => row.order_num,
       sortable: true,
     },
     {
-      name: "Product Title",
+      name: "상품명",
       selector: (row) => row.title,
       sortable: true,
     },
     {
-      name: "Price",
+      name: "가격",
       selector: (row) => row.price,
       sortable: true,
     },
     {
-      name: "Delivery Status",
-      selector: (row) => row.delivery_status,
+      name: "배송 상태",
+      selector: (row) => deliveryStatusText(row.delivery_status),
       sortable: true,
+    },
+    {
+      name: "Actions",
+      cell: (row) => renderButtons(row.id),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
     },
   ];
 
   return (
     <div className="App">
       <DataTable
-        title="Order Information"
+        title="꿈비 배송상태 컨트롤러"
         columns={columns}
         data={data}
         progressPending={loading}
