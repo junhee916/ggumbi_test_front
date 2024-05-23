@@ -28,19 +28,25 @@ const Main = () => {
     fetchData();
   }, [statusChanged]); // statusChanged가 변경될 때마다 useEffect 실행
 
-  const deliveryStatusText = (status) => {
+  const deliveryStatusText = (status, clearDate) => {
+    let statusText = "";
     switch (status) {
       case "0":
-        return "배송전";
+        statusText = "배송전";
+        break;
       case "1":
-        return "입고";
+        statusText = "입고";
+        break;
       case "2":
-        return "배송중";
+        statusText = "배송중";
+        break;
       case "3":
-        return "배송완료";
+        statusText = "배송완료";
+        break;
       default:
-        return "알 수 없음";
+        statusText = "알 수 없음";
     }
+    return `${statusText} (${clearDate})`;
   };
 
   const handleStatusChange = async (id, orderNum, newStatus) => {
@@ -71,22 +77,6 @@ const Main = () => {
     }
   };
 
-  // const recallEvent = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "http://43.201.34.41:3002/api/getDeliveryInfo?order_num=1",
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     console.log("recall 확인: ", response.data);
-  //     setData(response.data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //     setLoading(false);
-  //   }
-  // };
   const renderButtons = (row) => (
     <div>
       <button onClick={() => handleStatusChange(row.id, row.order_num, 0)}>
@@ -102,7 +92,7 @@ const Main = () => {
         배송완료
       </button>
       <button onClick={() => handleStatusChange(row.id, row.order_num, 4)}>
-        배송불가
+        반품불가
       </button>
     </div>
   );
@@ -135,7 +125,8 @@ const Main = () => {
     },
     {
       name: "배송 상태",
-      selector: (row) => deliveryStatusText(row.delivery_status),
+      selector: (row) =>
+        deliveryStatusText(row.delivery_status, row.clear_date),
       sortable: true,
     },
     {
