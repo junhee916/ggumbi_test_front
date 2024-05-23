@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
@@ -6,6 +5,7 @@ import DataTable from "react-data-table-component";
 const Main = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statusChanged, setStatusChanged] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +26,7 @@ const Main = () => {
     };
 
     fetchData();
-  }, []);
+  }, [statusChanged]); // statusChanged가 변경될 때마다 useEffect 실행
 
   const deliveryStatusText = (status) => {
     switch (status) {
@@ -62,13 +62,15 @@ const Main = () => {
 
       // 상태를 업데이트합니다.
       const updatedData = data.map((item) =>
-        item.order_num === id ? response.data[0] : item
+        item.order_num === orderNum ? response.data[0] : item
       );
       setData(updatedData);
+      setStatusChanged(!statusChanged); // 상태 변경을 트리거하여 useEffect 재실행
     } catch (error) {
       console.error("Error updating order:", error);
     }
   };
+
   const renderButtons = (row) => (
     <div>
       <button onClick={() => handleStatusChange(row.id, row.order_num, 0)}>
@@ -123,7 +125,7 @@ const Main = () => {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-      width: "500px", // 너비를 200px로 설정
+      width: "500px", // 너비를 500px로 설정
     },
   ];
 
