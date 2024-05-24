@@ -11,7 +11,7 @@ const Main = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://43.201.34.41:3002/api/setOrderInfo",
+          "http://3.37.133.186:3002/api/setOrderInfo",
           {
             withCredentials: true,
           }
@@ -53,7 +53,7 @@ const Main = () => {
     try {
       // POST 요청 예시
       const response = await axios.post(
-        "http://43.201.34.41:3002/api/deliveryControlOrder",
+        "http://3.37.133.186:3002/api/deliveryControlOrder",
         {
           order_num: orderNum,
           new_status: newStatus,
